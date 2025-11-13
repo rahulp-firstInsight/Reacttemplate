@@ -4,7 +4,7 @@ import { templateApi } from './api/templateApi';
 
 const API_CONFIG = {
   // Default to localhost:8080 for live database connection
-  BASE_URL: 'https://scribereacttemplate.evaa.ai:8080',
+  BASE_URL: 'https://reacttemplateexpress.onrender.com',
   HEADERS: {
     'Content-Type': 'application/json'
   },
