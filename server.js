@@ -18,8 +18,8 @@ const PORT = process.env.PORT || 8080; // Use port 8080 for live server (common 
 // Middleware - Configure CORS for live server
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://scribereacttemplate.evaa.ai/', 'https://scribereacttemplate.evaa.ai:8080'] // Add your live frontend URLs
-    : ['http://localhost:5173', 'http://localhost:3000'], // Local development
+    ? ['https://reacttemplate-llaq.onrender.com/', 'https://scribereacttemplate.evaa.ai:8080'] // Add your live frontend URLs
+    : ['http://localhost:5173', 'https://reacttemplate-llaq.onrender.com/', 'http://localhost:3000'], // Local development
   credentials: true,
   optionsSuccessStatus: 200
 };
