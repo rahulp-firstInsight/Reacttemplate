@@ -3,7 +3,7 @@
 import axios from 'axios';
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: 'http://localhost:8080', // Live backend API server (updated to port 8080)
+  BASE_URL: 'https://reacttemplateexpress.onrender.com', // Live backend API server (updated to port 8080)
   AI_SCRIBE_URL: 'https://aiscribeqa.maximeyes.com:5005', // AI Scribe processing server
   ENDPOINTS: {
     TEMPLATES: '/api/templates',
