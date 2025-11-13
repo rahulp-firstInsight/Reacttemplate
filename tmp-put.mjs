@@ -1,0 +1,34 @@
+import http from 'http';
+import { URL } from 'url';
+
+const data = JSON.stringify({ configuration: { test: 'ping' } });
+
+const options = {
+  hostname: 'localhost',
+  port: 3001,
+  path: '/api/templates/8/configuration',
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Content-Length': Buffer.byteLength(data),
+  },
+};
+
+const req = http.request(options, (res) => {
+  console.log('STATUS:', res.statusCode);
+  res.setEncoding('utf8');
+  let body = '';
+  res.on('data', (chunk) => body += chunk);
+  res.on('end', () => {
+    console.log('BODY:', body);
+    process.exit(0);
+  });
+});
+
+req.on('error', (e) => {
+  console.error('Problem with request:', e.message);
+  process.exit(1);
+});
+
+req.write(data);
+req.end();
