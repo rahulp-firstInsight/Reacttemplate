@@ -53,7 +53,7 @@ function generateStandardJson(sections: Section[]): string {
       Section: (section.children || []).map(mapSection),
       ListFields: (section.fields || []).map(field => ({
         FieldName: field.name,
-        FieldType: String(field.dataType), // Ensures FieldType is always a string
+        FieldType: "string", // Always output "string" for FieldType
         required: field.required,
         description: field.description,
         defaultValue: field.defaultValue !== undefined ? field.defaultValue : "",
