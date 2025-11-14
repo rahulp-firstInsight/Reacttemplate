@@ -56,7 +56,7 @@ function generateStandardJson(sections: Section[]): string {
         FieldType: String(field.dataType), // Always output as string
         required: field.required,
         description: field.description,
-        defaultValue: field.defaultValue,
+        defaultValue: field.defaultValue !== undefined ? field.defaultValue : "",
         Literals: field.dropdownOptions ? field.dropdownOptions.split(',').map(v => v.trim()) : []
       }))
     };
