@@ -48,17 +48,26 @@ interface Template {
 
 function generateStandardJson(sections: Section[]): string {
   function mapSection(section: Section): any {
+    const repeatedFields = (section.fields || []).filter(field => field.repeated);
+    const nonRepeatedFields = (section.fields || []).filter(field => !field.repeated);
+    const fieldMapper = (field: Field) => {
+      const fieldJson: any = {
+        FieldName: field.name,
+        FieldType: "string",
+        required: field.required,
+        description: field.description,
+        defaultValue: field.defaultValue !== undefined ? field.defaultValue : ""
+      };
+      if (field.dataType === "dropdown") {
+        fieldJson.Literals = field.dropdownOptions ? field.dropdownOptions.split(',').map(v => v.trim()) : [];
+      }
+      return fieldJson;
+    };
     return {
       SectionName: section.name,
       Section: (section.children || []).map(mapSection),
-      ListFields: (section.fields || []).map(field => ({
-        FieldName: field.name,
-        FieldType: "string", // Always output "string" for FieldType
-        required: field.required,
-        description: field.description,
-        defaultValue: field.defaultValue !== undefined ? field.defaultValue : "",
-        Literals: field.dropdownOptions ? field.dropdownOptions.split(',').map(v => v.trim()) : []
-      }))
+      Fields: nonRepeatedFields.map(fieldMapper),
+      ListFields: repeatedFields.map(fieldMapper)
     };
   }
   const standard = sections.filter(s => !s.parentId).map(mapSection);
